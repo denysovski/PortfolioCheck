@@ -12,9 +12,10 @@ export function ContactSection() {
             Let's<br />Create
           </h2>
           <img
-            src="/assets/flower.png"
+            src="dist/assets/flower.png"
             alt="Decorative flower"
-            className="pointer-events-none absolute right-[-6rem] top-[-11rem] h-[800px] w-[800px] object-contain"
+            className="pointer-events-none absolute h-[480px] w-[480px] object-contain"
+            style={{ right: "-130px", top: "-20px" }}
           />
         </div>
 
