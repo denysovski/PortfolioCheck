@@ -169,18 +169,20 @@ export function useGsapReveal() {
         gsap.fromTo(
           el,
           {
-            y: 24,
+            y: 160,
+            scale: 0.965,
             boxShadow: "0 -8px 20px rgba(0,0,0,0.14)",
           },
           {
-            y: -64,
-            boxShadow: "0 -40px 96px rgba(0,0,0,0.42)",
+            y: -168,
+            scale: 1,
+            boxShadow: "0 -48px 118px rgba(0,0,0,0.48)",
             ease: "none",
             scrollTrigger: {
               trigger: el,
-              start: "top 92%",
-              end: "bottom top",
-              scrub: 1.2,
+              start: "top 105%",
+              end: "top 14%",
+              scrub: 2.6,
             },
           }
         );
@@ -194,15 +196,15 @@ export function useGsapReveal() {
               scale: 1,
             },
             {
-              filter: "blur(10px)",
-              opacity: 0.45,
-              scale: 0.985,
+              filter: "blur(20px)",
+              opacity: 0.05,
+              scale: 0.93,
               ease: "none",
               scrollTrigger: {
                 trigger: el,
-                start: "top 92%",
-                end: "top 35%",
-                scrub: 1.1,
+                start: "top 105%",
+                end: "top 18%",
+                scrub: 2.6,
               },
             }
           );
@@ -309,6 +311,27 @@ export function useGsapReveal() {
           },
         });
       });
+
+      const contactSection = containerRef.current?.querySelector<HTMLElement>("[data-contact-section]");
+      const flower = contactSection?.querySelector<HTMLElement>("[data-flower-grow]");
+
+      if (contactSection && flower) {
+        gsap.fromTo(
+          flower,
+          { scale: 0.2, opacity: 0, transformOrigin: "center center" },
+          {
+            scale: 1,
+            opacity: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: contactSection,
+              start: "top 88%",
+              end: "top 40%",
+              scrub: 1.6,
+            },
+          }
+        );
+      }
     }, containerRef);
 
     return () => ctx.revert();

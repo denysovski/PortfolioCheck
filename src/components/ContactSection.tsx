@@ -3,7 +3,7 @@ import flowerImg from "@/assets/flower.png";
 
 export function ContactSection() {
   return (
-    <section id="contact" className="section-padding py-24 md:py-40">
+    <section id="contact" data-contact-section className="section-padding py-24 md:py-40">
       <div data-line className="divider mb-16" />
 
       <div data-scale-up>
@@ -15,8 +15,9 @@ export function ContactSection() {
           <img
             src={flowerImg}
             alt="Decorative flower"
-            className="pointer-events-none absolute h-[480px] w-[480px] object-contain"
-            style={{ right: "-120px", top: "80px" }}
+            data-flower-grow
+            className="flower-grow pointer-events-none absolute h-[480px] w-[480px] object-contain"
+            style={{ right: "-370px", top: "80px" }}
           />
         </div>
 

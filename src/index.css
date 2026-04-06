@@ -197,3 +197,8 @@ html.lenis, html.lenis body {
   color: transparent;
   -webkit-text-stroke: 1px hsl(var(--foreground));
 }
+
+.flower-grow {
+  transform-origin: center;
+  will-change: transform, opacity;
+}

@@ -127,7 +127,7 @@ export function WorkSection() {
     <section
       id="work"
       data-overlap-layer
-      className="section-padding relative z-30 -mt-10 md:-mt-16 pt-20 md:pt-28 pb-24 md:pb-40 bg-background rounded-t-[30px] md:rounded-t-[44px] shadow-[0_-26px_56px_rgba(0,0,0,0.3)]"
+      className="section-padding relative z-30 -mt-20 md:-mt-32 pt-14 md:pt-20 pb-24 md:pb-40 bg-background rounded-t-[30px] md:rounded-t-[44px] shadow-[0_-26px_56px_rgba(0,0,0,0.3)]"
     >
       <style>{`
         @keyframes genre-border-spin {

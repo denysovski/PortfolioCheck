@@ -8,7 +8,7 @@ function VelocitySegment({ rowKey }: { rowKey: string }) {
       {Array.from({ length: 4 }).map((_, i) => (
         <span
           key={`${rowKey}-${i}`}
-          className="velocity-item text-display-md text-black"
+          className="velocity-item text-[clamp(1.45rem,3.7vw,3.4rem)] font-bold uppercase tracking-[-0.03em] text-black"
           style={{ animationDelay: `${(i % 4) * 0.2}s` }}
         >
           <span>{labels[0]}</span>
@@ -88,7 +88,7 @@ export function MarqueeSection() {
   }, []);
 
   return (
-    <section data-marquee-focus className="py-20 md:py-28 overflow-hidden border-y border-black/10 bg-white">
+    <section data-marquee-focus className="py-10 md:py-14 overflow-hidden border-y border-black/10 bg-white">
       <style>{`
         @keyframes velocity-wave {
           0%, 100% { transform: translateY(0); }
@@ -111,15 +111,15 @@ export function MarqueeSection() {
         .velocity-segment {
           display: flex;
           align-items: center;
-          gap: 2.25rem;
+          gap: 1.25rem;
           white-space: nowrap;
-          padding-right: 2.25rem;
+          padding-right: 1.25rem;
         }
 
         .velocity-item {
           display: inline-flex;
           align-items: center;
-          gap: 1rem;
+          gap: 0.65rem;
           animation: velocity-wave 2.8s ease-in-out infinite;
           will-change: transform;
         }
@@ -128,7 +128,7 @@ export function MarqueeSection() {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          font-size: clamp(1rem, 2vw, 1.4rem);
+          font-size: clamp(0.7rem, 1.25vw, 0.95rem);
           line-height: 1;
           margin-inline: 0.1rem;
         }
