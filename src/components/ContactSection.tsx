@@ -15,7 +15,7 @@ export function ContactSection() {
             src="dist/assets/flower.png"
             alt="Decorative flower"
             className="pointer-events-none absolute h-[480px] w-[480px] object-contain"
-            style={{ right: "-200px", top: "80px" }}
+            style={{ right: "-120px", top: "80px" }}
           />
         </div>
 
