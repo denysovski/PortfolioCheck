@@ -1,4 +1,5 @@
 import { ArrowDownRight, ArrowUpRight } from "lucide-react";
+import flowerImg from "@/assets/flower.png";
 
 export function ContactSection() {
   return (
@@ -11,6 +12,12 @@ export function ContactSection() {
           <h2 className="text-display-xl text-foreground">
             Let's<br />Create
           </h2>
+          <img
+            src={flowerImg}
+            alt="Decorative flower"
+            className="pointer-events-none absolute h-[480px] w-[480px] object-contain"
+            style={{ right: "-120px", top: "80px" }}
+          />
         </div>
 
         <div className="flex flex-wrap gap-4 mb-12">
