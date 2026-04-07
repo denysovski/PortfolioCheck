@@ -115,7 +115,7 @@ export function ServicesSection() {
   }, []);
 
   const handleMove = (event: MouseEvent<HTMLElement>, images: string[]) => {
-    if (!isTrailEnabled) return;
+    if (!isTrailEnabled || window.innerWidth < 1024 || !(window.matchMedia("(hover: hover)").matches)) return;
 
     const rect = event.currentTarget.getBoundingClientRect();
     const ratio = Math.min(Math.max((event.clientX - rect.left) / rect.width, 0), 0.9999);
@@ -135,9 +135,9 @@ export function ServicesSection() {
   };
 
   return (
-    <section id="services" ref={sectionRef} className="relative min-h-[240vh]">
+    <section id="services" ref={sectionRef} className="relative min-h-[180vh] md:min-h-[240vh]">
       <div
-        className={`fixed left-0 top-0 z-[70] pointer-events-none transition-opacity duration-300 ${trail.visible ? "opacity-100" : "opacity-0"}`}
+        className={`fixed left-0 top-0 z-[70] pointer-events-none transition-opacity duration-300 hidden lg:block ${trail.visible ? "opacity-100" : "opacity-0"}`}
         style={{ transform: `translate(${trail.x - 330}px, ${trail.y - 70}px)` }}
       >
         <img
@@ -148,22 +148,22 @@ export function ServicesSection() {
       </div>
 
       {/* Sticky white panel that grows */}
-      <div className="sticky top-0 h-screen overflow-hidden z-[60]">
+      <div className="sticky top-0 h-[100svh] overflow-hidden z-[60]">
         <div
           data-services-reveal
-          className="relative h-full w-full origin-center bg-white text-black overflow-hidden will-change-[transform] rounded-[32px]"
+          className="relative h-full w-full origin-center bg-white text-black overflow-hidden will-change-[transform] rounded-[18px] md:rounded-[32px]"
         >
           {/* Main intro text - Gets bigger and then disappears */}
-          <div data-services-intro className="absolute inset-0 flex items-center justify-center text-center px-6 md:px-12">
+          <div data-services-intro className="absolute inset-0 flex items-center justify-center text-center px-4 md:px-12">
             <h2 className="text-display-lg max-w-6xl text-black leading-[0.9] text-center">
-              <span className="flex items-center justify-center gap-3 md:gap-4 whitespace-nowrap">
+              <span className="flex flex-wrap items-center justify-center gap-2 md:gap-4">
                 <ShinyText text="I BUILD" />
                 <img
                   src={buildImage}
                   alt="Headphones"
                   data-build-image
                   className="inline-block object-contain align-middle"
-                  style={{ height: "0.88em", width: "40px", transition: "width 0.1s ease-out" }}
+                  style={{ height: "0.82em", width: "34px", transition: "width 0.1s ease-out" }}
                 />
                 <ShinyText text="BRANDING" />
               </span>
@@ -174,7 +174,7 @@ export function ServicesSection() {
           </div>
 
           {/* Services content - appears after intro disappears */}
-          <div data-services-content className="absolute inset-0 flex items-center opacity-0 translate-x-[-48px] px-6 md:px-16 lg:px-24 section-padding py-12 md:py-16">
+          <div data-services-content className="absolute inset-0 flex items-center opacity-0 translate-x-[-48px] px-4 sm:px-6 md:px-16 lg:px-24 section-padding py-10 md:py-16">
             <div className="w-full">
               <div className="mb-8 md:mb-12">
                 <p className="text-[clamp(0.75rem,1vw,1rem)] uppercase tracking-[0.22em] text-black/60 mb-3 font-[var(--font-headline)]">What I Do</p>

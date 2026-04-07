@@ -141,9 +141,10 @@ export function useGsapReveal() {
       });
 
       // Featured project cards entrance from left/right
-      gsap.utils.toArray<HTMLElement>("[data-reveal-project]").forEach((el) => {
+      gsap.utils.toArray<HTMLElement>("[data-reveal-project]").forEach((el, i) => {
         const side = el.getAttribute("data-project-side");
         const xOffset = side === "left" ? -80 : 80;
+        const driftAmount = i % 2 === 0 ? 120 : 95;
 
         gsap.fromTo(
           el,
@@ -160,6 +161,17 @@ export function useGsapReveal() {
             },
           }
         );
+
+        gsap.to(el, {
+          y: driftAmount,
+          ease: "none",
+          scrollTrigger: {
+            trigger: el,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.2,
+          },
+        });
       });
 
       // Layer overlap lift for Featured Projects over the marquee section
@@ -171,12 +183,10 @@ export function useGsapReveal() {
           {
             y: 160,
             scale: 0.965,
-            boxShadow: "0 -8px 20px rgba(0,0,0,0.14)",
           },
           {
             y: -168,
             scale: 1,
-            boxShadow: "0 -48px 118px rgba(0,0,0,0.48)",
             ease: "none",
             scrollTrigger: {
               trigger: el,

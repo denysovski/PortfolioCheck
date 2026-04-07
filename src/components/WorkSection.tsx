@@ -1,5 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
 import portfolioArchitecture from "@/assets/portfolio-architecture.jpg";
 import portfolioFashion from "@/assets/portfolio-fashion.jpg";
 import portfolioUxui from "@/assets/portfolio-uxui.jpg";
@@ -76,6 +76,7 @@ const projects = [
   {
     title: "Ethereal Frames",
     category: "Photography",
+    tags: ["Portrait Photography", "Editorial", "Lighting Direction"],
     image: portfolioFashion,
     year: "2024",
     aspect: "aspect-[3/4]",
@@ -85,6 +86,7 @@ const projects = [
   {
     title: "Digital Canvas",
     category: "UX/UI Design",
+    tags: ["UX/UI", "Product Design", "Interaction"],
     image: portfolioUxui,
     year: "2024",
     aspect: "aspect-[16/10]",
@@ -94,6 +96,7 @@ const projects = [
   {
     title: "Monolith",
     category: "Web Design",
+    tags: ["Brand Identity", "Web Design", "Art Direction"],
     image: portfolioWebdesign,
     year: "2023",
     aspect: "aspect-[16/10]",
@@ -103,6 +106,7 @@ const projects = [
   {
     title: "Concrete Poetry",
     category: "Photography",
+    tags: ["Architecture Photography", "Urban", "Composition"],
     image: portfolioArchitecture,
     year: "2023",
     aspect: "aspect-[3/4]",
@@ -112,6 +116,7 @@ const projects = [
   {
     title: "Bold Voices",
     category: "Advertising visuals",
+    tags: ["Advertising", "Campaign Visuals", "Poster System"],
     image: portfolioPoster,
     year: "2024",
     aspect: "aspect-[3/4]",
@@ -122,12 +127,21 @@ const projects = [
 
 export function WorkSection() {
   const [activeStyle, setActiveStyle] = useState<string | null>(null);
+  const [genreShiftX, setGenreShiftX] = useState(0);
+
+  const handleGenreMouseMove = (event: MouseEvent<HTMLDivElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const ratio = Math.min(1, Math.max(0, x / rect.width));
+    // Left side pulls bubbles toward center, right side returns to default alignment.
+    setGenreShiftX((1 - ratio) * -140);
+  };
 
   return (
     <section
       id="work"
       data-overlap-layer
-      className="section-padding relative z-30 -mt-20 md:-mt-32 pt-14 md:pt-20 pb-24 md:pb-40 bg-background rounded-t-[30px] md:rounded-t-[44px] shadow-[0_-26px_56px_rgba(0,0,0,0.3)]"
+      className="section-padding relative z-30 -mt-20 md:-mt-32 pt-14 md:pt-20 pb-24 md:pb-40 bg-background rounded-t-[30px] md:rounded-t-[44px]"
     >
       <style>{`
         @keyframes genre-border-spin {
@@ -162,7 +176,13 @@ export function WorkSection() {
         <h2 className="text-display-lg text-foreground" data-reveal>
           Featured<br />Projects
         </h2>
-        <div className="mt-8 flex flex-wrap gap-3 md:gap-4 justify-center md:justify-end" data-reveal>
+        <div
+          className="mt-8 flex flex-wrap gap-3 md:gap-4 justify-center md:justify-end transition-transform duration-500 ease-out"
+          data-reveal
+          onMouseMove={handleGenreMouseMove}
+          onMouseLeave={() => setGenreShiftX(0)}
+          style={{ transform: `translate3d(${genreShiftX}px, 0, 0)` }}
+        >
           {styles.map((style, index) => (
             <StyleBubble
               key={style.name}
@@ -183,7 +203,7 @@ export function WorkSection() {
         {projects.map((project, i) => (
           <div
             key={project.title}
-            className={`group cursor-pointer ${i === 1 ? "md:mt-24" : ""} ${i === 3 ? "md:mt-[-4rem]" : ""}`}
+            className={`group cursor-pointer ${i === 1 ? "md:mt-24" : ""} ${i === 2 ? "md:mt-40" : ""} ${i === 3 ? "md:mt-[-4rem]" : ""}`}
             data-reveal-project
             data-project-side={i % 2 === 0 ? "left" : "right"}
           >
@@ -205,29 +225,29 @@ export function WorkSection() {
             </div>
             <div className="flex items-start justify-between" data-reveal>
               <div>
-                <h3 className="text-2xl md:text-3xl font-semibold text-foreground tracking-tight mb-1 flex items-center gap-2 group-hover:gap-4 transition-all duration-300">
+                <h3 className={`font-headline uppercase text-[clamp(2.6rem,7vw,8.2rem)] leading-[0.85] tracking-[-0.04em] text-foreground mb-3 flex items-center gap-2 group-hover:gap-4 transition-all duration-300 ${project.title === "Bold Voices" ? "whitespace-nowrap" : ""}`}>
                   {project.title}
-                  <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors duration-300" />
+                  <ArrowUpRight className="w-8 h-8 md:w-10 md:h-10 text-muted-foreground group-hover:text-foreground transition-colors duration-300" />
                 </h3>
-                <p className="text-muted-foreground text-sm">{project.category}</p>
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={`${project.title}-${tag}`}
+                      className="inline-flex items-center rounded-full bg-white text-black px-[12px] py-[6px] text-[10px] md:text-xs font-semibold tracking-[0.08em] uppercase"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
               <span className="text-label">{project.year}</span>
             </div>
-            <p className="text-sm text-muted-foreground mt-3" data-reveal>
-              {project.summary}
-            </p>
           </div>
         ))}
       </div>
 
-      <div className="mt-10 flex justify-end" data-reveal>
-        <p className="max-w-4xl text-sm text-muted-foreground text-right">
-          Fast turnarounds. Strong visual language. Production-ready assets across photo, web, and advertising outputs.
-        </p>
-      </div>
-
-      <div className="flex justify-center mt-16" data-reveal>
-        <button className="px-10 py-4 border border-border text-foreground text-label hover:bg-foreground hover:text-background transition-all duration-500">
+      <div className="flex justify-center mt-24 md:mt-[100px]" data-reveal>
+        <button className="min-w-[280px] md:min-w-[360px] px-10 py-4 border border-border text-foreground text-label hover:bg-foreground hover:text-background transition-all duration-500">
           All Projects
         </button>
       </div>
