@@ -12,7 +12,7 @@ export function AboutSection() {
     <section id="about" className="section-padding relative overflow-hidden py-20 md:py-40">
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 grayscale"
         style={{ backgroundImage: `url(${visionTexture})` }}
       />
       <div aria-hidden="true" className="absolute inset-0 bg-black/70" />
