@@ -16,8 +16,8 @@ export function ContactSection() {
             src={flowerImg}
             alt="Decorative flower"
             data-flower-grow
-            className="flower-grow pointer-events-none absolute h-[480px] w-[480px] object-contain"
-            style={{ right: "-370px", top: "80px" }}
+            className="flower-grow pointer-events-none absolute z-10 h-[220px] w-[220px] object-contain md:h-[360px] md:w-[360px]"
+            style={{ right: "-90px", top: "50px" }}
           />
         </div>
 
